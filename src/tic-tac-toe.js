@@ -1,5 +1,6 @@
 import React from 'react';
 import injectSheet from 'react-jss'
+import {PLAYER_O, PLAYER_X, BOARD_SIZE_THREE} from './constants.js'
 import Board from './board.js'
 
 const stylesheet = {
@@ -23,10 +24,7 @@ const stylesheet = {
     }
 }
 
-const PLAYER_X = 'X';
-const PLAYER_O = 'O';
-
-class Game extends React.Component {
+class TicTacToe extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -98,7 +96,8 @@ class Game extends React.Component {
         return (
             <div className={this.props.classes.game}>
                 <div>
-                    <Board 
+                    <Board
+                        size={BOARD_SIZE_THREE}
                         squares={current.squares}
                         onClick={i => this.handleClick(i)}
                     />
@@ -132,4 +131,4 @@ function calculateWinner(squares) {
     return null;
 };
 
-export default injectSheet(stylesheet)(Game)
+export default injectSheet(stylesheet)(TicTacToe)

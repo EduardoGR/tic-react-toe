@@ -13,35 +13,29 @@ const stylesheet = {
 }
 
 class Board extends React.Component {
-    renderSquare(i) {
+    renderSquare(cellIndex) {
         return (
             <Square
-                value={this.props.squares[i]}
-                onClick={() => this.props.onClick(i)}
+                key={cellIndex}
+                value={this.props.squares[cellIndex]}
+                onClick={() => this.props.onClick(cellIndex)}
             />
         );
     }
-  
-    render() {  
-        return (
-            <div>
-                <div className={this.props.classes.boardRow}>
-                    {this.renderSquare(0)}
-                    {this.renderSquare(1)}
-                    {this.renderSquare(2)}
-                </div>
-                <div className={this.props.classes.boardRow}>
-                    {this.renderSquare(3)}
-                    {this.renderSquare(4)}
-                    {this.renderSquare(5)}
-                </div>
-                <div className={this.props.classes.boardRow}>
-                    {this.renderSquare(6)}
-                    {this.renderSquare(7)}
-                    {this.renderSquare(8)}
-                </div>
-            </div>
-        );
+
+    render() {
+        let board = [];
+        let items = [];
+        let cellIndex;
+        for (let row = 0; row < this.props.size; ++row) {
+            for (let column = 0; column < this.props.size; ++column) {
+                cellIndex = column + row * this.props.size;
+                items.push(this.renderSquare(cellIndex));
+            }
+            board.push(<div key={row} className={this.props.classes.boardRow}>{items}</div>)
+            items = []
+        }
+        return <div>{board}</div>;
     }
 }
 
