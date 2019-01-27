@@ -1,6 +1,6 @@
 import React from 'react';
 import injectSheet from 'react-jss'
-import Square from './square.js'
+import Square from './square'
 
 const stylesheet = {
     boardRow: {
@@ -13,12 +13,20 @@ const stylesheet = {
 }
 
 class Board extends React.Component {
+    onClickBoard(cellIndex, symbol) {
+        if (this.props.board[cellIndex] == null && this.props.wonLine === undefined) {
+            this.props.onClickBoard(cellIndex, symbol);
+        }
+    }
+
     renderSquare(cellIndex) {
+        let symbol = this.props.board[cellIndex];
         return (
             <Square
                 key={cellIndex}
-                value={this.props.squares[cellIndex]}
-                onClick={() => this.props.onClick(cellIndex)}
+                symbol={symbol}
+                turn={this.props.turn}
+                onClick={this.onClickBoard.bind(this, cellIndex)}
             />
         );
     }

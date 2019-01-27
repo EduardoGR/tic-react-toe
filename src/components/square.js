@@ -22,12 +22,12 @@ const stylesheet = {
     },
 }
 
-const Square = ({onClick, value, classes}) =>
+const Square = ({onClick, symbol, turn, classes}) =>
     <button 
         className={classes.square}
-        onClick={onClick}
+        onClick={() => onClick(turn)}
     >
-        {value}
+        {symbol}
     </button>;
 
 export default injectSheet(stylesheet)(Square)
