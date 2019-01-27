@@ -10,19 +10,23 @@ const stylesheet = {
         'font': '14px "Century Gothic", Futura, sans-serif',
         'margin': '20px',
         'display': 'flex',
-        'flex-direction': 'row',
+        'flexDirection': 'row',
+        'justifyContent': 'center'
+
     },
     gameInfo: {
-        'margin-left': '20px',
+        'marginLeft': '20px',
     },
     status: {
-        'margin-bottom': '10px',
+        'marginBottom': '10px',
+        'font': '24px "Century Gothic", Futura, sans-serif',
     },
     li: {
-        'padding-left': '30px',
+        'paddingLeft': '30px',
+        'marginBottom': '2px',
     },
     ol: {
-        'padding-left': '30px',
+        'paddingLeft': '20px',
     }
 }
 
@@ -66,6 +70,10 @@ const TicTacToe = ({
 }) => {
     const movementsHistory = getMovementsHistory(history, onClickMovementHistory, classes);
     return (
+        <div>
+        <div className={classes.game}>
+            <div className={classes.status}>{getStatus(gameStatus, turn)}</div>
+        </div>
         <div className={classes.game}>
             <div>
                 <Board
@@ -77,9 +85,9 @@ const TicTacToe = ({
                 />
             </div>
             <div className={classes.gameInfo}>
-                <div className={classes.status}>{getStatus(gameStatus, turn)}</div>
                 <ol className={classes.ol}>{movementsHistory}</ol>
             </div>
+        </div>
         </div>
     );
 };
