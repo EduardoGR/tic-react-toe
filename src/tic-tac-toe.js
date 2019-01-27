@@ -1,6 +1,7 @@
 import React from 'react';
 import injectSheet from 'react-jss'
-import {PLAYER_O, PLAYER_X, BOARD_SIZE_THREE} from './constants.js'
+import {PLAYER_O, PLAYER_X, BOARD_SIZE_THREE, RESULT_DRAW} from './constants.js'
+import {calculateWinner} from './utils.js'
 import Board from './board.js'
 
 const stylesheet = {
@@ -49,7 +50,10 @@ class TicTacToe extends React.Component {
 
     getStatus(winner) {
         let status;
-        if (winner) {
+
+        if (RESULT_DRAW === winner) {
+            status = 'Draw!'
+        } else if (winner) {
             status = 'Winner ' + winner;
         } else {
             status = 'Next player: ' + this.getNextPlayer();
@@ -110,25 +114,5 @@ class TicTacToe extends React.Component {
         );
     }
 }
-
-function calculateWinner(squares) {
-    const lines = [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        [0, 4, 8],
-        [2, 4, 6],
-    ];
-    for (let i = 0; i < lines.length; i++) {
-        const [a, b, c] = lines[i];
-        if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-            return squares[a];
-        }
-    }
-    return null;
-};
 
 export default injectSheet(stylesheet)(TicTacToe)
