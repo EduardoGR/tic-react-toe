@@ -31,7 +31,7 @@ export const getResultFromBoard = (board) => {
     if (winningLine.length !== 0) {
         gameStatus = GAME_STATUS_WIN;
         wonLine = winningLine.pop();
-        wonSymbol = board[wonLine.slice().pop()]
+        wonSymbol = board[wonLine.slice().pop()];
     } else if (isBoardFilled(board)) {
         gameStatus = GAME_STATUS_DRAW;
     } else {
